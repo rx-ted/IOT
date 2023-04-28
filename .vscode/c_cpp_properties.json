@@ -1,0 +1,51 @@
+{
+    "configurations": [
+        {
+            "intelliSenseMode": "clang-x64",
+            "name": "Win32",
+            "cppStandard": "c++11",
+            "cStandard": "c99",
+            "compilerPath": "D:/workers/riscv-none-embed-gcc/bin",
+            "includePath": [
+                "./.vscode",
+                "./bsp",
+                "./bsp/CH32V208",
+                "./bsp/CH32V208/build",
+                "./bsp/CH32V208/Core",
+                "./bsp/CH32V208/Debug",
+                "./bsp/CH32V208/Hal",
+                "./bsp/CH32V208/Hal/inc",
+                "./bsp/CH32V208/Hal/src",
+                "./bsp/CH32V208/Ld",
+                "./bsp/CH32V208/Startup",
+                "./bsp/CH32V208/User",
+                "./bsp/N32G4FR",
+                "./doc",
+                "./OS",
+                "./OS/FreeRTOS",
+                "./OS/rt-thread",
+                "./OS/rt-thread/components",
+                "./OS/rt-thread/components/drivers",
+                "./OS/rt-thread/components/drivers/include",
+                "./OS/rt-thread/components/drivers/include/drivers",
+                "./OS/rt-thread/components/drivers/include/ipc",
+                "./OS/rt-thread/components/drivers/misc",
+                "./OS/rt-thread/components/drivers/serial",
+                "./OS/rt-thread/components/finsh",
+                "./OS/rt-thread/drivers",
+                "./OS/rt-thread/include",
+                "./OS/rt-thread/include/libc",
+                "./OS/rt-thread/libcpu",
+                "./OS/rt-thread/libcpu/risc-v",
+                "./OS/rt-thread/libcpu/risc-v/common",
+                "./OS/rt-thread/src",
+                "./tools"
+            ],
+            "defines": [
+                "__RTTHREAD__"
+            ],
+            "configurationProvider": "ms-vscode.makefile-tools"
+        }
+    ],
+    "version": 4
+}
