@@ -1,13 +1,7 @@
 {
     "files.associations": {
-        "ch32v20x_exti.h": "c",
-        "ch32v20x_flash.h": "c",
-        "debug.h": "c",
-        "rtdevice.h": "c",
-        "pin.h": "c",
-        "rtthread.h": "c",
-        "rthw.h": "c",
-        "ch32v20x.h": "c",
-        "serial.h": "c"
+        "ch32v20x_it.h": "c",
+        "board.h": "c",
+        "rtthread.h": "c"
     }
 }
