@@ -5,97 +5,67 @@ CP           = $(TOOLCHAIN)objcopy
 AS           = $(TOOLCHAIN)gcc
 HEX          = $(CP) -O ihex
 BIN          = $(CP) -O binary -S
-TARGET = main
+TARGET = 01LED
 
 # IOT position
-ROOT_DIR := ../../../../
+ROOT_DIR := ../../../..
 # bsp position
 BSP_DIR := .
 BUILD_DIR = $(BSP_DIR)/build
+LD_FILES = $(ROOT_DIR)/bsp/CH32V208/libraries/Ld/Link.ld
 
 
-C_FILES +=  $(ROOT_DIR)/rtthread/src/clock.c
-C_FILES +=  $(ROOT_DIR)/rtthread/src/components.c
-C_FILES +=  $(ROOT_DIR)/rtthread/src/cpu.c
-C_FILES +=  $(ROOT_DIR)/rtthread/src/device.c
-C_FILES +=  $(ROOT_DIR)/rtthread/src/idle.c
-C_FILES +=  $(ROOT_DIR)/rtthread/src/ipc.c
-C_FILES +=  $(ROOT_DIR)/rtthread/src/irq.c
-C_FILES +=  $(ROOT_DIR)/rtthread/src/kservice.c
-C_FILES +=  $(ROOT_DIR)/rtthread/src/mem.c
-C_FILES +=  $(ROOT_DIR)/rtthread/src/memheap.c
-C_FILES +=  $(ROOT_DIR)/rtthread/src/mempool.c
-C_FILES +=  $(ROOT_DIR)/rtthread/src/object.c
-C_FILES +=  $(ROOT_DIR)/rtthread/src/scheduler.c
-C_FILES +=  $(ROOT_DIR)/rtthread/src/slab.c
-C_FILES +=  $(ROOT_DIR)/rtthread/src/thread.c
-C_FILES +=  $(ROOT_DIR)/rtthread/src/timer.c 
-S_FILES +=  $(ROOT_DIR)/rtthread/libcpu/risc-v/common/context_gcc.S 
-C_FILES +=  $(ROOT_DIR)/rtthread/libcpu/risc-v/common/cpuport.c
-S_FILES +=  $(ROOT_DIR)/rtthread/libcpu/risc-v/common/interrupt_gcc.S
-C_FILES +=  $(ROOT_DIR)/rtthread/components/finsh/cmd.c
-C_FILES +=  $(ROOT_DIR)/rtthread/components/finsh/msh_cmd.c
-C_FILES +=  $(ROOT_DIR)/rtthread/components/finsh/msh.c
-C_FILES +=  $(ROOT_DIR)/rtthread/components/finsh/msh_file.c
-C_FILES +=  $(ROOT_DIR)/rtthread/components/finsh/shell.c
-C_FILES +=  $(ROOT_DIR)/rtthread/components/finsh/symbol.c
-C_FILES +=  $(ROOT_DIR)/rtthread/components/drivers/serial/serial.c
-C_FILES +=  $(ROOT_DIR)/rtthread/components/drivers/misc/pin.c
-C_FILES +=  $(ROOT_DIR)/rtthread/board.c
-C_FILES +=  $(ROOT_DIR)/drivers/drv_gpio.c
-C_FILES +=  $(ROOT_DIR)/drivers/drv_usart.c
-C_FILES +=  $(ROOT_DIR)/User/ch32v20x_it.c
-C_FILES +=  $(ROOT_DIR)/User/main.c 
-C_FILES +=  $(ROOT_DIR)/User/system_ch32v20x.c
-S_FILES +=  $(ROOT_DIR)/Startup/startup_ch32v20x_D8W.S
-C_FILES +=  $(ROOT_DIR)/Peripheral/src/ch32v20x_adc.c
-C_FILES +=  $(ROOT_DIR)/Peripheral/src/ch32v20x_bkp.c
-C_FILES +=  $(ROOT_DIR)/Peripheral/src/ch32v20x_can.c
-C_FILES +=  $(ROOT_DIR)/Peripheral/src/ch32v20x_crc.c
-C_FILES +=  $(ROOT_DIR)/Peripheral/src/ch32v20x_dbgmcu.c
-C_FILES +=  $(ROOT_DIR)/Peripheral/src/ch32v20x_dma.c
-C_FILES +=  $(ROOT_DIR)/Peripheral/src/ch32v20x_exti.c
-C_FILES +=  $(ROOT_DIR)/Peripheral/src/ch32v20x_flash.c
-C_FILES +=  $(ROOT_DIR)/Peripheral/src/ch32v20x_gpio.c
-C_FILES +=  $(ROOT_DIR)/Peripheral/src/ch32v20x_i2c.c
-C_FILES +=  $(ROOT_DIR)/Peripheral/src/ch32v20x_iwdg.c
-C_FILES +=  $(ROOT_DIR)/Peripheral/src/ch32v20x_misc.c
-C_FILES +=  $(ROOT_DIR)/Peripheral/src/ch32v20x_opa.c
-C_FILES +=  $(ROOT_DIR)/Peripheral/src/ch32v20x_pwr.c
-C_FILES +=  $(ROOT_DIR)/Peripheral/src/ch32v20x_rcc.c
-C_FILES +=  $(ROOT_DIR)/Peripheral/src/ch32v20x_rtc.c
-C_FILES +=  $(ROOT_DIR)/Peripheral/src/ch32v20x_spi.c
-C_FILES +=  $(ROOT_DIR)/Peripheral/src/ch32v20x_tim.c
-C_FILES +=  $(ROOT_DIR)/Peripheral/src/ch32v20x_usart.c
-C_FILES +=  $(ROOT_DIR)/Peripheral/src/ch32v20x_wwdg.c
-C_FILES +=  $(ROOT_DIR)/Core/core_riscv.c
-C_FILES +=  $(ROOT_DIR)/Debug/debug.c
+C_FILES += $(ROOT_DIR)/bsp/CH32V208/applicants/01LED/main.c
+C_FILES += $(ROOT_DIR)/bsp/CH32V208/libraries/config/ch32v20x_it.c
+C_FILES += $(ROOT_DIR)/bsp/CH32V208/libraries/config/system_ch32v20x.c
+C_FILES += $(ROOT_DIR)/bsp/CH32V208/libraries/Core/core_riscv.c
+C_FILES += $(ROOT_DIR)/bsp/CH32V208/libraries/Debug/debug.c
+C_FILES += $(ROOT_DIR)/bsp/CH32V208/libraries/drivers/drv_gpio.c
+C_FILES += $(ROOT_DIR)/bsp/CH32V208/libraries/drivers/drv_usart.c
+
+C_FILES += $(wildcard $(ROOT_DIR)/bsp/CH32V208/libraries/Hal/src/*.c)
+C_FILES += $(wildcard $(ROOT_DIR)/OS/rtthread/src/*.c)
+C_FILES += $(wildcard $(ROOT_DIR)/OS/rtthread/components/finsh/*.c)
+C_FILES += $(wildcard $(ROOT_DIR)/OS/rtthread/libcpu/risc-v/common/*.c)
+
+C_FILES += $(ROOT_DIR)/OS/rtthread/board.c
+C_FILES += $(ROOT_DIR)/OS/rtthread/components/drivers/misc/pin.c
+C_FILES += $(ROOT_DIR)/OS/rtthread/components/drivers/serial/serial.c
+
+
+
+
+S_FILES += $(wildcard $(ROOT_DIR)/OS/rtthread/libcpu/risc-v/common/*.S)
+S_FILES += $(ROOT_DIR)/bsp/CH32V208/libraries/Startup/startup_ch32v20x_D8W.S
+
+
 
 FLAGS += -march=rv32imac -mabi=ilp32 -msmall-data-limit=8 -msave-restore -Os -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -fno-common -Wunused -Wuninitialized  -g -std=gnu99 -DCH32V20x_D8W 
 
 
+# INC_DIR += $(shell find $(ROOT_DIR)/ -type d)
+INC_DIR += $(ROOT_DIR)/bsp/CH32V208/applicants/$(TARGET)
+INC_DIR += $(ROOT_DIR)/bsp/CH32V208/libraries/config
+INC_DIR += $(ROOT_DIR)/bsp/CH32V208/libraries/Core
+INC_DIR += $(ROOT_DIR)/bsp/CH32V208/libraries/Debug
+INC_DIR += $(ROOT_DIR)/bsp/CH32V208/libraries/drivers
+INC_DIR += $(ROOT_DIR)/bsp/CH32V208/libraries/Hal/inc
+INC_DIR += $(ROOT_DIR)/OS/rtthread
+INC_DIR += $(ROOT_DIR)/OS/rtthread/components/drivers/include
+INC_DIR += $(ROOT_DIR)/OS/rtthread/components/finsh
+INC_DIR += $(ROOT_DIR)/OS/rtthread/include
+INC_DIR += $(ROOT_DIR)/OS/rtthread/libcpu/risc-v/common
+INC_DIRS += $(patsubst %, -I%, $(INC_DIR))
 
-INC_DIRS += -I"$(ROOT_DIR)/Debug"
-INC_DIRS += -I"$(ROOT_DIR)/Core"
-INC_DIRS += -I"$(ROOT_DIR)/User"
-INC_DIRS += -I"$(ROOT_DIR)/Peripheral/inc"
-INC_DIRS += -I"$(ROOT_DIR)/drivers"
-INC_DIRS += -I"$(ROOT_DIR)/rtthread/include"
-INC_DIRS += -I"$(ROOT_DIR)/rtthread/include/libc"
-INC_DIRS += -I"$(ROOT_DIR)/rtthread/libcpu/risc-v/common"
-INC_DIRS += -I"$(ROOT_DIR)/rtthread/src"
-INC_DIRS += -I"$(ROOT_DIR)/rtthread"
-INC_DIRS += -I"$(ROOT_DIR)/rtthread/components/drivers/include"
-INC_DIRS += -I"$(ROOT_DIR)/rtthread/components/drivers/misc"
-INC_DIRS += -I"$(ROOT_DIR)/rtthread/components/drivers/serial"
-INC_DIRS += -I"$(ROOT_DIR)/rtthread/components/finsh"
 
- 
+
+
+
 
 C_FLAGS += $(CC) $(FLAGS) $(INC_DIRS) -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -c -o "$@" "$<"
 AS_FLAGS += $(CC)  -x assembler-with-cpp $(FLAGS) $(INC_DIRS) -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -c -o "$@" "$<"
 
-LINK_FLAGS += $(CC) $(FLAGS) -T"$(ROOT_DIR)/Ld/Link.ld" -nostartfiles -Xlinker --gc-sections -Wl,-Map,"$(BUILD_DIR)/$(TARGET).map" --specs=nano.specs --specs=nosys.specs
+LINK_FLAGS += $(CC) $(FLAGS) -T"$(LD_FILES)" -nostartfiles -Xlinker --gc-sections -Wl,-Map,"$(BUILD_DIR)/$(TARGET).map" --specs=nano.specs --specs=nosys.specs
 
 
 all: $(BUILD_DIR)/$(TARGET).elf $(BUILD_DIR)/$(TARGET).hex $(BUILD_DIR)/$(TARGET).bin
@@ -129,3 +99,12 @@ $(BUILD_DIR)/%.bin: $(BUILD_DIR)/%.elf | $(BUILD_DIR)
 $(BUILD_DIR):
 	@echo $(OBJECTS)
 	mkdir $@
+
+push:
+	git add ../../../../
+	git commit -m "update"
+	git push
+
+c:
+	rmdir	 /s /q build
+
