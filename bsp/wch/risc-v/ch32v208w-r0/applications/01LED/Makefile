@@ -78,7 +78,7 @@ DATE = $(shell date)
 push:
 	git add $(RTT_ROOT)
 	git commit -m "update :$(DATE)"
-	git push
+	git push origin/main
 
 c:
 	rmdir	 /s /q build
