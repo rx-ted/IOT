@@ -50,3 +50,5 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+bsp/wch/risc-v/ch32v208w-r0/applications/01LED/build
