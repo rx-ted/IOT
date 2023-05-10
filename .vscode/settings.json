@@ -1,7 +1,25 @@
 {
     "files.associations": {
+        "*.ld": "mapfile",
         "ch32v20x_it.h": "c",
         "board.h": "c",
-        "rtthread.h": "c"
+        "rtthread.h": "c",
+        "drv_gpio.h": "c",
+        "pin.h": "c",
+        "rtc.h": "c",
+        "serial.h": "c",
+        "rt_drv_pwm.h": "c",
+        "ch32v20x.h": "c",
+        "drv_pwm.h": "c",
+        "rtdevice.h": "c",
+        "ringbuffer.h": "c",
+        "completion.h": "c",
+        "ringblk_buf.h": "c",
+        "poll.h": "c",
+        "pipe.h": "c",
+        "waitqueue.h": "c",
+        "workqueue.h": "c",
+        "dataqueue.h": "c",
+        "rthw.h": "c"
     }
 }
