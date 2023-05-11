@@ -247,4 +247,8 @@
 /* Board extended module Drivers */
 
 
+/* ssd1306 */
+#define PKG_USING_SSD1306
+
+
 #endif

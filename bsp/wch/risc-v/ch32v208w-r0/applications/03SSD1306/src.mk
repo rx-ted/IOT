@@ -73,3 +73,10 @@ C_FILES +=$(RTT_ROOT)/src/object.c
 C_FILES +=$(RTT_ROOT)/src/scheduler_up.c
 C_FILES +=$(RTT_ROOT)/src/thread.c
 C_FILES +=$(RTT_ROOT)/src/timer.c
+
+
+
+# download path
+C_FILES +=./rtt-ssd1306/src/ssd1306.c
+C_FILES +=./rtt-ssd1306/src/ssd1306_fonts.c
+

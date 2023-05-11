@@ -1,0 +1,6 @@
+{
+    "install": [
+        "https://github.com/luhuadong/rtt-ssd1306"
+    ],
+    "luhuadong": "rtt-ssd1306"
+}

@@ -27,3 +27,10 @@ CPPPATHS +=	-I$(RTT_ROOT)/components/libc/posix/io/stdio
 CPPPATHS +=	-I$(RTT_ROOT)/components/libc/posix/ipc 
 
 DEFINES := -DRT_USING_LIBC -DRT_USING_NEWLIBC -D_POSIX_C_SOURCE=1 -D__RTTHREAD__
+
+
+
+
+
+# download path
+CPPPATHS +=	-I./rtt-ssd1306/inc    
