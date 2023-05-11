@@ -249,6 +249,6 @@
 
 /* ssd1306 */
 #define PKG_USING_SSD1306
-
+#define RT_USING_I2C
 
 #endif

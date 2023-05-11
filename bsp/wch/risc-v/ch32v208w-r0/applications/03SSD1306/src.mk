@@ -80,3 +80,6 @@ C_FILES +=$(RTT_ROOT)/src/timer.c
 C_FILES +=./rtt-ssd1306/src/ssd1306.c
 C_FILES +=./rtt-ssd1306/src/ssd1306_fonts.c
 
+
+C_FILES +=$(RTT_ROOT)/components/drivers/i2c/i2c_core.c
+C_FILES +=$(RTT_ROOT)/components/drivers/i2c/i2c_dev.c

@@ -1,11 +1,12 @@
 BSP_ROOT ?= ../..
 RTT_ROOT ?= ../../../../../..
 
+EXTERN_LIB := -lc -lm 
 
-CFLAGS := -march=rv32imac -mabi=ilp32 -DUSE_PLIC -DUSE_M_TIME -DNO_INIT -mcmodel=medany -msmall-data-limit=8 -L.  -nostartfiles  -lc  -save-temps=obj -O0 -g3
+CFLAGS := -march=rv32imac -mabi=ilp32 -DUSE_PLIC -DUSE_M_TIME -DNO_INIT -mcmodel=medany -msmall-data-limit=8 -L.  -nostartfiles  -lc  -save-temps=obj -O0 -g3 $(EXTERN_LIB)
 AFLAGS :=-c -march=rv32imac -mabi=ilp32 -DUSE_PLIC -DUSE_M_TIME -DNO_INIT -mcmodel=medany -msmall-data-limit=8 -L.  -nostartfiles  -lc  -x assembler-with-cpp -I. -g3
 LFLAGS := -march=rv32imac -mabi=ilp32 -DUSE_PLIC -DUSE_M_TIME -DNO_INIT -mcmodel=medany -msmall-data-limit=8 -L.  -nostartfiles  -lc  -Wl,--gc-sections,-cref,-Map=$(BUILD_DIR)/$(TARGET).map -T $(BSP_ROOT)/board/linker_scripts/link.lds
-EXTERN_LIB := -lc -lm 
+
 
 CPPPATHS +=-I.
 CPPPATHS +=-I$(BSP_ROOT)/applications 
@@ -34,3 +35,5 @@ DEFINES := -DRT_USING_LIBC -DRT_USING_NEWLIBC -D_POSIX_C_SOURCE=1 -D__RTTHREAD__
 
 # download path
 CPPPATHS +=	-I./rtt-ssd1306/inc    
+
+# CPPPATHS +=	-ID:/workers/riscv-none-embed-gcc/riscv-none-embed/include
