@@ -38,7 +38,7 @@ FLAGS += -march=rv32imac -mabi=ilp32 -msmall-data-limit=8 -msave-restore -Os -fm
 C_FLAGS += $(CC) $(CFLAGS) -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -c -o "$@" "$<"
 AS_FLAGS += $(CC) $(AFLAGS) -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -c -o "$@" "$<"
 
-LINK_FLAGS += $(CC) $(LFLAGS) $(EXTERN_LIB)
+LINK_FLAGS += $(CC) $(LFLAGS) $(EXTERN_LIB)  -Wl,--gc-sections
 # --specs=nano.specs 
 
 
@@ -53,6 +53,9 @@ vpath %.c $(sort $(dir $(C_FILES)))
 
 OBJECTS += $(sort $(OBJECT))
 
+objs:
+	@echo $(OBJECTS)
+	@echo $(C_FILES)
 
 $(BUILD_DIR)/%.o:%.S Makefile | $(BUILD_DIR)
 	$(AS_FLAGS)

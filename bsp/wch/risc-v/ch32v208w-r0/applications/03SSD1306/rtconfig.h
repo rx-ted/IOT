@@ -2,7 +2,7 @@
  * @Author: rx-ted
  * @Date: 2023-04-03 12:08:37
  * @LastEditors: rx-ted
- * @LastEditTime: 2023-05-02 22:09:45
+ * @LastEditTime: 2023-05-16 22:01:41
  */
 #ifndef RT_CONFIG_H__
 #define RT_CONFIG_H__
@@ -248,7 +248,10 @@
 
 
 /* ssd1306 */
-#define PKG_USING_SSD1306
-#define RT_USING_I2C
+
+#define PKG_USING_U8G2
+#define U8G2_USE_HW_I2C
+
+
 
 #endif

@@ -76,10 +76,5 @@ C_FILES +=$(RTT_ROOT)/src/timer.c
 
 
 
-# download path
-C_FILES +=./rtt-ssd1306/src/ssd1306.c
-C_FILES +=./rtt-ssd1306/src/ssd1306_fonts.c
-
-
-C_FILES +=$(RTT_ROOT)/components/drivers/i2c/i2c_core.c
-C_FILES +=$(RTT_ROOT)/components/drivers/i2c/i2c_dev.c
+include rt-u8g2/rt-u8g2.mk
+# include ssd1306/ssd1306.mk

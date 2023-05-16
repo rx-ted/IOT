@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "*.ld": "mapfile",
+        "*.lds": "mapfile",
         "ch32v20x_it.h": "c",
         "board.h": "c",
         "rtthread.h": "c",
@@ -20,6 +21,16 @@
         "waitqueue.h": "c",
         "workqueue.h": "c",
         "dataqueue.h": "c",
-        "rthw.h": "c"
+        "rthw.h": "c",
+        "i2c.h": "c",
+        "ssd1306.h": "c",
+        "ssd1306_conf.h": "c",
+        "math.h": "c",
+        "cmath": "c",
+        "*.tcc": "c",
+        "ssd1306_fonts.h": "c",
+        "crtdefs.h": "c",
+        "u8g2lib.h": "c",
+        "u8g2.h": "c"
     }
 }

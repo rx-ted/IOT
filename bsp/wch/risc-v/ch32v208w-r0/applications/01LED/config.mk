@@ -24,6 +24,8 @@ CPPPATHS +=	-I$(BSP_ROOT)
 CPPPATHS +=	-I$(RTT_ROOT)/include 
 CPPPATHS +=	-I$(RTT_ROOT)/components/libc/posix/io/poll 
 CPPPATHS +=	-I$(RTT_ROOT)/components/libc/posix/io/stdio 
-CPPPATHS +=	-I$(RTT_ROOT)/components/libc/posix/ipc 
+CPPPATHS +=	-I$(RTT_ROOT)/components/libc/posix/ipc
+
+
 
 DEFINES := -DRT_USING_LIBC -DRT_USING_NEWLIBC -D_POSIX_C_SOURCE=1 -D__RTTHREAD__

@@ -2,136 +2,72 @@
  * @Author: rx-ted
  * @Date: 2023-04-03 12:08:37
  * @LastEditors: rx-ted
- * @LastEditTime: 2023-05-11 23:19:32
+ * @LastEditTime: 2023-05-16 23:20:48
+ */
+
+#include "ch32v20x.h"
+#include "drivers/pin.h"
+#include <board.h>
+#include <rtdevice.h>
+#include <rthw.h>
+#include <rtthread.h>
+#include "u8g2.h"
+#include <u8g2_port.h>
+/**
+ * @brief 
+ *      text    data     bss     dec     hex filename
+ O3     68944    1960   45368  116272   1c630 build/03SSD1306.elf
+ Og     60780    1960   45368  108108   1a64c build/03SSD1306.elf
+ * 
+ * 
+ * @return *** int 
  */
 
 
-#include "ch32v20x.h"
-#include <rtthread.h>
-#include <rthw.h>
-#include "drivers/pin.h"
-#include <board.h>
-#include "ssd1306.h"
+// GET_PIN(A,1)
+
+// #define OLED_I2C_PIN_SDA                    59  // PB7
+// #define OLED_I2C_PIN_SCL                    58  // PB6
+#define OLED_I2C_PIN_SCL                     rt_pin_get("PA.1")
+#define OLED_I2C_PIN_SDA                    rt_pin_get("PA.0")
+
+#define LED0 rt_pin_get("PA.3")
 
 
+// static void ssd1306_12832_sw_i2c_example(int argc,char *argv[])
+// {
+//     u8g2_t u8g2;
 
-void ssd1306_TestBorder()
+//     // Initialization
+//     u8g2_Setup_ssd1305_i2c_128x32_noname_f( &u8g2, U8G2_R0, u8x8_byte_sw_i2c, u8x8_rt_gpio_and_delay);
+//     u8x8_SetPin(u8g2_GetU8x8(&u8g2), U8X8_PIN_I2C_CLOCK, OLED_I2C_PIN_SCL);
+//     u8x8_SetPin(u8g2_GetU8x8(&u8g2), U8X8_PIN_I2C_DATA, OLED_I2C_PIN_SDA);    
+
+//     u8g2_InitDisplay(&u8g2);
+//     u8g2_SetPowerSave(&u8g2, 0);
+
+//     // Draw Graphics
+//     /* full buffer example, setup procedure ends in _f */
+//     u8g2_ClearBuffer(&u8g2);
+//     u8g2_SetFont(&u8g2, u8g2_font_ncenB08_tr);
+//     u8g2_DrawStr(&u8g2, 1, 1, "U8g2 on RT-Thread");
+//     u8g2_SendBuffer(&u8g2);
+
+//     u8g2_SetFont(&u8g2, u8g2_font_unifont_t_symbols);
+//     u8g2_DrawGlyph(&u8g2, 1, 10, 0x2603 );
+//     u8g2_SendBuffer(&u8g2);
+// }
+// MSH_CMD_EXPORT(ssd1306_12832_sw_i2c_example, i2c ssd1306 software i2c sample);
+
+int main(void)
 {
-    ssd1306_Fill(Black);
-
-    u32 start = rt_tick_get();
-    u32 end   = start;
-    uint8_t x = 0;
-    uint8_t y = 0;
-    do {
-        ssd1306_DrawPixel(x, y, Black);
-
-        if ((y == 0) && (x < 127))
-            x++;
-        else if ((x == 127) && (y < 31))
-            y++;
-        else if ((y == 31) && (x > 0))
-            x--;
-        else
-            y--;
-
-        ssd1306_DrawPixel(x, y, White);
-        ssd1306_UpdateScreen();
-
-        rt_thread_mdelay(5);
-        end = rt_tick_get();
-    } while ((end - start) < 2000);
-
-    rt_thread_mdelay(1000);
-}
-
-void ssd1306_TestFonts()
-{
-    ssd1306_Fill(Black);
-    ssd1306_SetCursor(2, 0);
-    ssd1306_WriteString("Font 16x26", Font_16x26, White);
-    ssd1306_UpdateScreen();
-    rt_thread_mdelay(1000);
-    ssd1306_Fill(Black);
-    ssd1306_SetCursor(2, 0);
-    ssd1306_WriteString("Font 11x18", Font_11x18, White);
-    ssd1306_UpdateScreen();
-    rt_thread_mdelay(1000);
-    ssd1306_Fill(Black);
-    ssd1306_SetCursor(2, 0);
-    ssd1306_WriteString("Font 7x10", Font_7x10, White);
-    ssd1306_SetCursor(2, 10);
-    ssd1306_WriteString("Font 6x8", Font_6x8, White);
-    ssd1306_UpdateScreen();
-}
-
-void ssd1306_TestLine()
-{
-    ssd1306_Line(1, 1, SSD1306_WIDTH - 1, SSD1306_HEIGHT - 1, White);
-    ssd1306_Line(SSD1306_WIDTH - 1, 1, 1, SSD1306_HEIGHT - 1, White);
-    ssd1306_UpdateScreen();
-    return;
-}
-
-
-
-void ssd1306_TestCircle()
-{
-    u32 delta;
-
-    for (delta = 0; delta < 5; delta++)
+    rt_pin_mode(LED0,PIN_MODE_OUTPUT);
+    rt_kprintf("MCU-CH32V208WBU6\r\n");
+    while(1)
     {
-        ssd1306_DrawCircle(20 * delta + 30, 30, 10, White);
+        rt_pin_write(LED0, PIN_HIGH);
+        rt_thread_mdelay(500);
+        rt_pin_write(LED0, PIN_LOW);
+        rt_thread_mdelay(500);
     }
-    ssd1306_UpdateScreen();
-    return;
-}
-
-
-void ssd1306_TestPolyline()
-{
-    SSD1306_VERTEX loc_vertex[] =
-        {
-            {35, 40},
-            {40, 20},
-            {45, 28},
-            {50, 10},
-            {45, 16},
-            {50, 10},
-            {53, 16}};
-
-    ssd1306_Polyline(loc_vertex, sizeof(loc_vertex) / sizeof(loc_vertex[0]), White);
-    ssd1306_UpdateScreen();
-    return;
-}
-
-
-void ssd1306_TestAll()
-{
-
-    ssd1306_TestBorder();
-
-    ssd1306_TestFonts();
-    rt_thread_mdelay(3000);
-
-    ssd1306_Fill(Black);
-    ssd1306_TestLine();
-    rt_thread_mdelay(3000);
-
-    ssd1306_Fill(Black);
-    ssd1306_TestPolyline();
-    rt_thread_mdelay(3000);
-
-    ssd1306_Fill(Black);
-    rt_thread_mdelay(3000);
-
-    ssd1306_Fill(Black);
-    ssd1306_TestCircle();
-    rt_thread_mdelay(3000);
-}
-int main (){
-
-    ssd1306_Init();
-    ssd1306_TestAll();
-    return 0;
 }
