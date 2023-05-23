@@ -17,73 +17,72 @@
 #ifndef __DRV_SPI_H__
 #define __DRV_SPI_H__
 
-#include <rtthread.h>
 #include <rtdevice.h>
 #include <rthw.h>
+#include <rtthread.h>
 
-#include "ch32v30x_rcc.h"
-#include "ch32v30x_gpio.h"
+// #include "ch32v30x_rcc.h"
+// #include "ch32v30x_gpio.h"
+#include "ch32v20x_gpio.h"
+#include "ch32v20x_rcc.h"
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif /* ifdef __cplusplus */
 
-struct ch32_hw_spi_cs
-{
-    GPIO_TypeDef* GPIOx;
-    rt_uint16_t GPIO_Pin;
-};
+    struct ch32_hw_spi_cs
+    {
+        GPIO_TypeDef *GPIOx;
+        rt_uint16_t GPIO_Pin;
+    };
 
-struct ch32_spi_config
-{
-    SPI_TypeDef *Instance;
-    char *bus_name;
-    IRQn_Type irq_type;
+    struct ch32_spi_config
+    {
+        SPI_TypeDef *Instance;
+        char *bus_name;
+        IRQn_Type irq_type;
+    };
 
-};
+    struct ch32_spi_device
+    {
+        rt_uint32_t pin;
+        char *bus_name;
+        char *device_name;
+    };
 
-struct ch32_spi_device
-{
-    rt_uint32_t pin;
-    char *bus_name;
-    char *device_name;
-};
+    typedef struct __SPI_HandleTypeDef
+    {
 
-typedef struct __SPI_HandleTypeDef
-{
+        SPI_TypeDef *Instance; /*!< SPI registers base address               */
 
-  SPI_TypeDef                *Instance;      /*!< SPI registers base address               */
+        SPI_InitTypeDef Init; /*!< SPI communication parameters             */
 
-  SPI_InitTypeDef            Init;           /*!< SPI communication parameters             */
+        rt_uint8_t *pTxBuffPtr; /*!< Pointer to SPI Tx transfer Buffer        */
 
-  rt_uint8_t                    *pTxBuffPtr;    /*!< Pointer to SPI Tx transfer Buffer        */
+        rt_uint16_t TxXferSize; /*!< SPI Tx Transfer size                     */
 
-  rt_uint16_t                   TxXferSize;     /*!< SPI Tx Transfer size                     */
+        volatile rt_uint16_t TxXferCount; /*!< SPI Tx Transfer Counter                  */
 
-  volatile rt_uint16_t          TxXferCount;    /*!< SPI Tx Transfer Counter                  */
+        rt_uint8_t *pRxBuffPtr; /*!< Pointer to SPI Rx transfer Buffer        */
 
-  rt_uint8_t                    *pRxBuffPtr;    /*!< Pointer to SPI Rx transfer Buffer        */
+        rt_uint16_t RxXferSize; /*!< SPI Rx Transfer size                     */
 
-  rt_uint16_t                   RxXferSize;     /*!< SPI Rx Transfer size                     */
+        volatile rt_uint16_t RxXferCount; /*!< SPI Rx Transfer Counter                  */
 
-  volatile rt_uint16_t          RxXferCount;    /*!< SPI Rx Transfer Counter                  */
+    } SPI_HandleTypeDef;
 
+    /* ch32 spi dirver class */
+    struct ch32_spi
+    {
+        SPI_HandleTypeDef handle;
 
-} SPI_HandleTypeDef;
+        struct ch32_spi_config *config;
+        struct rt_spi_configuration *cfg;
+        struct rt_spi_bus spi_bus;
+    };
 
-/* ch32 spi dirver class */
-struct ch32_spi
-{
-    SPI_HandleTypeDef handle;
-
-    struct ch32_spi_config *config;
-    struct rt_spi_configuration *cfg;
-    struct rt_spi_bus spi_bus;
-
-
-};
-
-rt_err_t rt_hw_spi_device_attach(const char *bus_name, const char *device_name, GPIO_TypeDef* cs_gpiox, rt_uint16_t cs_gpio_pin);
+    rt_err_t rt_hw_spi_device_attach(const char *bus_name, const char *device_name, GPIO_TypeDef *cs_gpiox, rt_uint16_t cs_gpio_pin);
 
 #ifdef __cplusplus
 }

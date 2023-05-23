@@ -77,4 +77,5 @@ C_FILES +=$(RTT_ROOT)/src/timer.c
 
 
 include rt-u8g2/rt-u8g2.mk
+# include rt_ili9341/rt_ili9341.mk
 # include ssd1306/ssd1306.mk

@@ -2,7 +2,7 @@
  * @Author: rx-ted
  * @Date: 2023-04-03 12:08:37
  * @LastEditors: rx-ted
- * @LastEditTime: 2023-05-16 22:01:41
+ * @LastEditTime: 2023-05-23 20:29:20
  */
 #ifndef RT_CONFIG_H__
 #define RT_CONFIG_H__
@@ -251,7 +251,7 @@
 
 #define PKG_USING_U8G2
 #define U8G2_USE_HW_I2C
-
-
+#define RT_USING_I2C
+#define BSP_USING_I2C2
 
 #endif

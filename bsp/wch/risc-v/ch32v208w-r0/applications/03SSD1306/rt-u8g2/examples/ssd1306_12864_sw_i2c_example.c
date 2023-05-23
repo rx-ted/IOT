@@ -11,8 +11,8 @@
 
 // #define OLED_I2C_PIN_SCL                    58  // PB6
 // #define OLED_I2C_PIN_SDA                    59  // PB7
-#define OLED_I2C_PIN_SCL                     rt_pin_get("PA.1")
-#define OLED_I2C_PIN_SDA                    rt_pin_get("PA.0")
+#define OLED_I2C_PIN_SCL                     rt_pin_get("PC.0")
+#define OLED_I2C_PIN_SDA                    rt_pin_get("PC.1")
 
 static void ssd1306_12864_sw_i2c_example(int argc,char *argv[])
 {

@@ -31,6 +31,7 @@
         "ssd1306_fonts.h": "c",
         "crtdefs.h": "c",
         "u8g2lib.h": "c",
-        "u8g2.h": "c"
+        "u8g2.h": "c",
+        "spi.h": "c"
     }
 }

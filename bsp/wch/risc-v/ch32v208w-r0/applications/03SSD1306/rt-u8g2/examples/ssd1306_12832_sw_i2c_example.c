@@ -2,13 +2,14 @@
  * @Author: rx-ted
  * @Date: 2023-05-16 21:47:56
  * @LastEditors: rx-ted
- * @LastEditTime: 2023-05-16 23:55:09
+ * @LastEditTime: 2023-05-23 20:18:43
  */
 #include <rthw.h>
 #include <rtthread.h>
 #include <rtdevice.h>
 #include <u8g2_port.h>
 #include "src/u8g2.h"
+#include<rtconfig.h>
 
 // #define OLED_I2C_PIN_SCL                    58  // PB6
 // #define OLED_I2C_PIN_SDA                    59  // PB7
@@ -30,13 +31,14 @@ static void ssd1306_12832_sw_i2c_example(int argc,char *argv[])
     // Draw Graphics
     /* full buffer example, setup procedure ends in _f */
     u8g2_ClearBuffer(&u8g2);
-    u8g2_SetFont(&u8g2, u8g2_font_4x6_tr);
-    u8g2_DrawStr(&u8g2, 1, 1, "U8g2 on RT-Thread\n66666");
-    
-    // rt_thread_mdelay(2000);
-    // u8g2_ClearBuffer(&u8g2);
+    u8g2_DrawLine(&u8g2, 0, 0, 20, 20);
     // u8g2_SetFont(&u8g2, u8g2_font_4x6_tr);
-    // u8g2_DrawStr(&u8g2, 1,16, "hello rx-ted" );
+    // u8g2_DrawStr(&u8g2, 1, 1, "U8g2 on RT-Thread\n66666");
+    rt_thread_mdelay(5000);
+    // // rt_thread_mdelay(2000);
+    u8g2_ClearBuffer(&u8g2);
+    u8g2_SetFont(&u8g2, u8g2_font_4x6_tr);
+    u8g2_DrawStr(&u8g2, 1,1, "hello rx-ted" );
 }
 MSH_CMD_EXPORT(ssd1306_12832_sw_i2c_example, i2c ssd1306 software i2c sample);
 
